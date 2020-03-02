@@ -1,0 +1,12 @@
+en:
+  welcome:
+    text: "Hi! Do you what schedule some meeting?"
+  unknown:
+    text: "Didn't get it"
+    callback_text: "I can't understand you"
+
+ru:
+  unknown:
+    text: "Непонял :("
+    callback_text: "Не понимаю тебя"
+

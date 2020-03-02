@@ -1,0 +1,101 @@
+{
+  "resource": "/icalendar",
+  "path": "/icalendar",
+  "httpMethod": "POST",
+  "headers": {
+    "Accept-Encoding": "gzip, deflate",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "RU",
+    "Content-Type": "application/json",
+    "Host": "ecut123123e-api.eu-central-1.amazonaws.com",
+    "Via": "1.1 cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "123==",
+    "X-Amzn-Trace-Id": "Root=1-5e232d92-"
+  },
+  "multiValueHeaders": {
+    "Accept-Encoding": [
+      "gzip, deflate"
+    ],
+    "CloudFront-Forwarded-Proto": [
+      "https"
+    ],
+    "CloudFront-Is-Desktop-Viewer": [
+      "true"
+    ],
+    "CloudFront-Is-Mobile-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-SmartTV-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Tablet-Viewer": [
+      "false"
+    ],
+    "CloudFront-Viewer-Country": [
+      "RU"
+    ],
+    "Content-Type": [
+      "application/json"
+    ],
+    "Host": [
+      "mk1r5cyp2i.execute-api.eu-central-1.amazonaws.com"
+    ],
+    "Via": [
+      "1.1 123.cloudfront.net (CloudFront)"
+    ],
+    "X-Amz-Cf-Id": [
+      "123=="
+    ],
+    "X-Amzn-Trace-Id": [
+      "Root=1-5e232d92-123"
+    ],
+    "X-Forwarded-For": [
+      "91.22222.6.133, 54.22222.244.102"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ]
+  },
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourceId": "njsjal",
+    "resourcePath": "/icalendar",
+    "httpMethod": "POST",
+    "extendedRequestId": "GgQO6HIpFiAFqhw=",
+    "requestTime": "18/Jan/2020:16:08:50 +0000",
+    "path": "/dev/icalendar",
+    "accountId": "225265212598",
+    "protocol": "HTTP/1.1",
+    "stage": "dev",
+    "domainPrefix": "mk1r5cyp2i",
+    "requestTimeEpoch": 1579363730585,
+    "requestId": "34441adb-71aa-4b33-91df-c539a7661d41",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "sourceIp": "91.108.6.133",
+      "principalOrgId": null,
+      "accessKey": null,
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": null,
+      "user": null
+    },
+    "domainName": "mk1r5cyp2i.execute-api.eu-central-1.amazonaws.com",
+    "apiId": "mk1r5cyp2i"
+  },
+  "body": "{\"update_id\":888665178,\n\"message\":{\"message_id\":25,\"from\":{\"id\":97474054,\"is_bot\":false,\"first_name\":\"Aleksey\",\"last_name\":\"Danullov\",\"username\":\"keil19\",\"language_code\":\"en\"},\"chat\":{\"id\":97474054,\"first_name\":\"Aleksey\",\"last_name\":\"Danullov\",\"username\":\"keil19\",\"type\":\"private\"},\"date\":1579363730,\"text\":\"/start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}",
+  "isBase64Encoded": false
+}
