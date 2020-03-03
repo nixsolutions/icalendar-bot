@@ -2,7 +2,7 @@ require:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 2.5.0
+  TargetRubyVersion: 2.6.5
   Exclude:
     - bin/console
     - vendor/**/*
