@@ -7,6 +7,16 @@ AllCops:
     - bin/console
     - vendor/**/*
 
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    -
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'webhook_handler.rb'
+
 Metrics/LineLength:
   Max: 120
 

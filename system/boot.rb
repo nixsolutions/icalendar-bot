@@ -6,6 +6,7 @@ Bundler.require
 require_relative 'application'
 root = Application.root
 
+ENV['APP_ENV'] ||= 'development'
 env_path = "#{root}/.env"
 env_path + ".#{ENV.fetch('APP_ENV')}" if ENV.fetch('APP_ENV')
 Dotenv.overload env_path
