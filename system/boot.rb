@@ -3,10 +3,12 @@
 require 'bundler'
 
 Bundler.require
-Dotenv.load
-
 require_relative 'application'
 root = Application.root
+
+env_path = "#{root}/.env"
+env_path + ".#{ENV.fetch('APP_ENV')}" if ENV.fetch('APP_ENV')
+Dotenv.overload env_path
 
 Import = Application.injector
 ArgsImport = Import.args

@@ -1,11 +1,15 @@
 en:
   welcome:
-    text: "Hi! Do you what schedule some meeting?"
+    text: "Hi, I'm the 🤖 who's gonna help you plan a great meeting.
+           Do you what schedule some meeting?"
   unknown:
     text: "Didn't get it"
     callback_text: "I can't understand you"
 
 ru:
+  welcome:
+    text: "Привет, я 🤖, который поможет тебе спланировать отличную встречу.
+          Ты планируешь какую-нибудь встречу?"
   unknown:
     text: "Непонял :("
     callback_text: "Не понимаю тебя"
