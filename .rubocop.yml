@@ -12,7 +12,7 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
-    -
+
 Lint/UnusedMethodArgument:
   Exclude:
     - 'webhook_handler.rb'
