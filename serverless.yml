@@ -1,0 +1,56 @@
+service: icalendar-bot
+
+custom:
+  myStage: ${opt:stage, self:provider.stage}
+  settings:
+    dev:
+      TELEGRAM_TOKEN: ${ssm:/app/${self:service}/dev/telegram_token}
+    prod:
+
+provider:
+  name: aws
+  runtime: ruby2.5
+  stage: ${opt:stage, 'dev'}
+  region: eu-central-1
+  memorySize: 128
+  timeout: 7
+  enviroment: ${self:custom.settings.${self:custom.myStage}}
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:CreateTable"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+      Resource:
+        - "*"
+
+  logs:
+    frameworkLambda: true
+
+functions:
+  icalendar:
+    handler: webhook_handler.webhook
+    events:
+      - http:
+          path: icalendar
+          method: post
+          cors: true
+
+#resources:
+#  Resources:
+#    usersTable:
+#      Type: AWS::DynamoDB::Table
+#      Properties:
+#        TableName: ${self:custom.settings.${self:custom.myStage}.USERS_TABLE}
+#        AttributeDefinitions:
+#          - AttributeName: "user_id"
+#            AttributeType: S
+#        KeySchema:
+#          - AttributeName: "user_id"
+#            KeyType: "N"
+#        ProvisionedThroughput:
+#          ReadCapacityUnits: 1
+#          WriteCapacityUnits: 1
