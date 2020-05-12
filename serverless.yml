@@ -5,11 +5,10 @@ custom:
   settings:
     dev:
       TELEGRAM_TOKEN: ${ssm:/app/${self:service}/dev/telegram_token}
-    prod:
 
 provider:
   name: aws
-  runtime: ruby2.5
+  runtime: ruby2.7
   stage: ${opt:stage, 'dev'}
   region: eu-central-1
   memorySize: 128
@@ -30,14 +29,30 @@ provider:
   logs:
     frameworkLambda: true
 
+layers:
+  gemlayer:
+    path: ruby
+
 functions:
   icalendar:
     handler: webhook_handler.webhook
+    layers:
+      - {Ref: GemlayerLambdaLayer }
+    environment:
+      GEM_PATH: /opt/2.7.0
     events:
       - http:
           path: icalendar
           method: post
           cors: true
+
+#package:
+#  include:
+#    - webhook_handler.rb
+#    - app/**
+#    - config/**
+#    - lib/**
+#    - system/**
 
 #resources:
 #  Resources:
