@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require 'bundler'
+require 'dotenv/load'
+require 'dynamoid'
+require 'telegram/bot'
+require 'dry-system'
 
-Bundler.require
 require_relative 'application'
 root = Application.root
 
