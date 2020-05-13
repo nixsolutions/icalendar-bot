@@ -13,7 +13,7 @@ provider:
   region: eu-central-1
   memorySize: 128
   timeout: 7
-  enviroment: ${self:custom.settings.${self:custom.myStage}}
+#  enviroment: ${self:custom.settings.${self:custom.myStage}}
 
   iamRoleStatements:
     - Effect: "Allow"
@@ -40,6 +40,7 @@ functions:
       - {Ref: GemlayerLambdaLayer }
     environment:
       GEM_PATH: /opt/2.7.0
+      TELEGRAM_BOT_API_TOKEN: ${ssm:/app/${self:service}/${self:custom.myStage}/telegram_token}
     events:
       - http:
           path: icalendar
