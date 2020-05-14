@@ -5,9 +5,8 @@ require 'dynamoid'
 Dir[File.expand_path 'lib/models/*.rb'].each { |f| require_relative f }
 
 Dynamoid.configure do |config|
-  config.access_key = ENV['AWS_ACCESS_KEY_ID']
-  config.secret_key = ENV['AWS_SECRET_ACCESS_KEY']
-  config.region = ENV['AWS_REGION']
+  config.namespace = 'dynamoid_app_development'
+  config.endpoint = 'http://localhost:8000'
 end
 
 Dynamoid.included_models.each { |m| m.create_table(sync: true) }
