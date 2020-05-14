@@ -56,9 +56,10 @@ module Commands
         )
       end
 
-      def reply_keyboard(*buttons)
+      def reply_keyboard(*buttons, one_time_keyboard: true)
         Telegram::Bot::Types::ReplyKeyboardMarkup.new(
-          keyboard: buttons_to_markup(buttons, :reply)
+          keyboard: buttons_to_markup(buttons, :reply),
+          one_time_keyboard: one_time_keyboard
         )
       end
 

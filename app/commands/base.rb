@@ -5,10 +5,8 @@ require 'forwardable'
 module Commands
   class Base
     extend Forwardable
-    # include KeyboardHelpers
+    include KeyboardHelpers
     # include ContextHelpers
-
-    # include Import['logger']
 
     attr_reader :api
 

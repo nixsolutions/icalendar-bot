@@ -2,6 +2,7 @@
 
 class User
   include Dynamoid::Document
+  table capacity_mode: :on_demand
 
   field :first_name
   field :last_name

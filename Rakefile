@@ -28,3 +28,12 @@ task :clear_requests, :my_bot_token do |t, args|
   res = Net::HTTP.get(uri)
   puts res
 end
+
+namespace :db do
+  task :create, :env do |t, args|
+    env = args[:env]
+    ENV['APP_ENV'] = env
+    require_relative 'system/boot'
+    Dynamoid.included_models.each { |m| m.create_table(sync: true) }
+  end
+end

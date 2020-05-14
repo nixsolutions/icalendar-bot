@@ -1,8 +1,11 @@
 # frozen_string_literal: true
+
 require 'dotenv/load'
 require 'dynamoid'
 require 'telegram/bot'
 require 'dry-system'
+require 'dynamoid'
+
 require_relative 'application'
 root = Application.root
 

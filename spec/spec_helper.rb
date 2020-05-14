@@ -2,8 +2,6 @@
 
 ENV['APP_ENV'] ||= 'test'
 
-# require 'bundler'
-# Bundler.require
 require_relative '../system/boot'
 
 RSpec.configure do |config|
