@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - bin/console
     - vendor/**/*
+    - ruby/**/**
 
 Metrics/BlockLength:
   Exclude:
