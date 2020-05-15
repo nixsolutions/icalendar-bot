@@ -2,10 +2,10 @@
 
 require 'uri'
 require 'net/http'
-TELEGRAM_URL = "https://api.telegram.org/bot"
+TELEGRAM_URL = 'https://api.telegram.org/bot'
 
-desc "Set telegram webhook"
-task :set_webhook, :my_bot_token, :url_to_send_updates_to do |t, args|
+desc 'Set telegram webhook'
+task :set_webhook, :my_bot_token, :url_to_send_updates_to do |_t, args|
   my_bot_token = args[:my_bot_token]
   url_to_send_updates_to = args[:url_to_send_updates_to]
   uri = URI("#{TELEGRAM_URL}#{my_bot_token}/setWebhook?url=#{url_to_send_updates_to}")
@@ -13,16 +13,16 @@ task :set_webhook, :my_bot_token, :url_to_send_updates_to do |t, args|
   puts res
 end
 
-desc "Remove telegram webhook"
-task :remove_webhook, :my_bot_token do |t, args|
+desc 'Remove telegram webhook'
+task :remove_webhook, :my_bot_token do |_t, args|
   my_bot_token = args[:my_bot_token]
   uri = URI("#{TELEGRAM_URL}#{my_bot_token}/setWebhook?remove")
-  res = Net::HTTP.post(uri,"{}")
+  res = Net::HTTP.post(uri, '{}')
   puts res
 end
 
-desc "Clear telegram request queue"
-task :clear_requests, :my_bot_token do |t, args|
+desc 'Clear telegram request queue'
+task :clear_requests, :my_bot_token do |_t, args|
   my_bot_token = args[:my_bot_token]
   uri = URI("#{TELEGRAM_URL}#{my_bot_token}/getUpdates?offset=54232484")
   res = Net::HTTP.get(uri)
@@ -30,7 +30,7 @@ task :clear_requests, :my_bot_token do |t, args|
 end
 
 namespace :db do
-  task :create, :env do |t, args|
+  task :create, :env do |_t, args|
     env = args[:env]
     ENV['APP_ENV'] = env
     require_relative 'system/boot'
