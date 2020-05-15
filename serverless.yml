@@ -13,7 +13,6 @@ provider:
   region: eu-central-1
   memorySize: 128
   timeout: 7
-#  enviroment: ${self:custom.settings.${self:custom.myStage}}
 
   iamRoleStatements:
     - Effect: "Allow"
@@ -29,16 +28,17 @@ provider:
   logs:
     frameworkLambda: true
 
-layers:
-  gemlayer:
-    path: ruby
+#layers:
+#  gemlayer:
+#    path: ruby
 
 functions:
   icalendar:
     handler: webhook_handler.webhook
     layers:
-      - {Ref: GemlayerLambdaLayer }
+      - arn:aws:lambda:eu-central-1:225265212598:layer:icalendarBotGemLayer:1
     environment:
+      APP_NAME: icalendar
       GEM_PATH: /opt/2.7.0
       TELEGRAM_BOT_API_TOKEN: ${ssm:/app/${self:service}/${self:custom.myStage}/telegram_token}
     events:
@@ -47,26 +47,12 @@ functions:
           method: post
           cors: true
 
-#package:
-#  include:
-#    - webhook_handler.rb
-#    - app/**
-#    - config/**
-#    - lib/**
-#    - system/**
-
-#resources:
-#  Resources:
-#    usersTable:
-#      Type: AWS::DynamoDB::Table
-#      Properties:
-#        TableName: ${self:custom.settings.${self:custom.myStage}.USERS_TABLE}
-#        AttributeDefinitions:
-#          - AttributeName: "user_id"
-#            AttributeType: S
-#        KeySchema:
-#          - AttributeName: "user_id"
-#            KeyType: "N"
-#        ProvisionedThroughput:
-#          ReadCapacityUnits: 1
-#          WriteCapacityUnits: 1
+package:
+  include:
+    - webhook_handler.rb
+    - app/**
+    - config/**
+    - lib/**
+    - system/**
+  exclude:
+    - ruby/**
