@@ -1,25 +1,41 @@
 # frozen_string_literal: true
 
-require 'dotenv/load'
+ENV['APP_NAME'] = 'icalendar'
+
+if %w[development test].include? ENV['APP_ENV']
+  require 'bundler'
+  Bundler.setup
+  require 'pry'
+  require 'dotenv'
+  Dotenv.overload ".env.#{ENV.fetch('APP_ENV')}"
+end
+
 require 'dynamoid'
 require 'telegram/bot'
-require 'dry-system'
-require 'dynamoid'
+require 'zeitwerk'
+require 'i18n'
 
-require_relative 'application'
-root = Application.root
+APP_ROOT = '../'
+require_relative 'boot/dynamoid'
+I18n.load_path << Dir[File.expand_path('config/locales') + '/*.yml']
+I18n.default_locale = :en
 
-ENV['APP_ENV'] ||= 'development'
-env_path = "#{root}/.env"
-env_path += ".#{ENV.fetch('APP_ENV')}" if ENV.fetch('APP_ENV')
-Dotenv.overload env_path
+class ICalendarBot
+  attr_reader :loader
 
-Import = Application.injector
-ArgsImport = Import.args
+  def initialize
+    @loader = Zeitwerk::Loader.new
+    loader.enable_reloading
+    loader.push_dir File.join('app')
+    loader.push_dir File.join('lib')
+    loader.collapse('lib/services')
+    loader.collapse('lib/models')
+  end
 
-Dir.glob(root.join('system/boot/*.rb')).sort.each { |f| require f }
-Dir.glob(root.join('app/*.rb')).sort.each { |f| require f }
-Dir.glob(root.join('app/**/*.rb')).sort.each { |f| require f }
-Dir.glob(root.join('app/commands/keyboards/*.rb')).sort.each { |f| require f }
+  def init
+    loader.setup
+  end
+end
 
-Application.finalize!
+bot = ICalendarBot.new
+bot.init

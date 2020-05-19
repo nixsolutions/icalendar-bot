@@ -35,5 +35,14 @@ namespace :db do
     ENV['APP_ENV'] = env
     require_relative 'system/boot'
     Dynamoid.included_models.each { |m| m.create_table(sync: true) }
+    p 'success'
+  end
+
+  task :drop, :env do |_t, args|
+    env = args[:env]
+    ENV['APP_ENV'] = env
+    require_relative 'system/boot'
+    DynamoidReset.all
+    p 'success'
   end
 end

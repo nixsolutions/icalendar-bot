@@ -10,11 +10,12 @@ module Commands
   FallbackError = Class.new(Error)
 
   COMMAND_CLASSES = {
-    '/start' => Commands::Start
-    # 'create_appointment': Commands::CreateAppointment.new(bot),
+    '/start': Commands::Start,
+    '📆 Schedule': Commands::CreateAppointment::SelectTime
   }.freeze
 
   CALLBACK_CLASSES = {
+    'schedule': Commands::CreateAppointment::SelectTime
   }.freeze
 
   FALLBACK_COMMAND_CLASS = Commands::Unknown

@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-# require all models
 Dir[File.expand_path 'lib/models/*.rb'].each { |f| require_relative f }
-app_name = ENV.fetch('APP_NAME')
-app_env = ENV.fetch('APP_ENV')
 Dynamoid.configure do |config|
-  config.namespace = "#{app_name}_#{app_env}"
-  config.endpoint = 'http://localhost:8000' if app_env == 'test'
+  config.namespace = "#{ENV.fetch('APP_NAME')}_#{ENV.fetch('APP_ENV')}"
+  config.endpoint = ENV.fetch('DYNAMO_DB_URL', nil)
 end
+
+Dynamoid.logger.level = Logger::FATAL
 
 module DynamoidReset
   def self.all

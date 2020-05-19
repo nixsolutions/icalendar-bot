@@ -6,6 +6,18 @@ class Dispatcher
   end
 
   def call(message)
+    call_command_depended_on_type(message)
+    { statusCode: 200 }
+  rescue StandardError => e
+    p e
+    { statusCode: 200 }
+  ensure
+    { statusCode: 200 }
+  end
+
+  private
+
+  def call_command_depended_on_type(message)
     case message
     when Telegram::Bot::Types::Message
       dispatch_message(message)
@@ -14,14 +26,7 @@ class Dispatcher
     else
       dispatch_message(message)
     end
-    { statusCode: 200 }
-  rescue StandardError
-    { statusCode: 200 }
-  ensure
-    { statusCode: 200 }
   end
-
-  private
 
   attr_reader :bot
 
@@ -44,6 +49,6 @@ class Dispatcher
   end
 
   def command_name(message)
-    message.text&.gsub(/_\d+$/, '').to_sym
+    message.text&.gsub(/_\d+$/, '')&.to_sym
   end
 end

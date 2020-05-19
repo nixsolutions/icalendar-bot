@@ -2,5 +2,4 @@
 ENV['APP_ENV'] ||= 'development'
 require_relative '../system/boot'
 
-require "pry"
 Pry.start
