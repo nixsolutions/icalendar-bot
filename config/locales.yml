@@ -2,6 +2,9 @@ en:
   welcome:
     text: "Hi, I'm the 🤖 who's gonna help you plan a great meeting.
            Do you what schedule some meeting?"
+  create_appointment:
+    choose_day: "Choose a day:"
+
   unknown:
     text: "Didn't get it"
     callback_text: "I can't understand you"

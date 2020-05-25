@@ -6,8 +6,8 @@ module Commands
       include KeyboardHelpers
 
       def call
-        inline_keyboard(
-          [button('💎'), button('')]
+        reply_keyboard(
+          [button('📆 Schedule'), button('Show My')]
         )
       end
     end

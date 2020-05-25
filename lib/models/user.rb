@@ -8,6 +8,6 @@ class User
   field :last_name
   field :username
   field :subscribers
-  field :bot_command_data
+  field :state
   has_many :appointments
 end
