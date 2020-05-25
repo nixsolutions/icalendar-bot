@@ -56,4 +56,4 @@ build-iPhoneSimulator/
 
 # package directories
 node_modules
-/.env
+event*.json

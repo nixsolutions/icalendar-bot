@@ -9,6 +9,8 @@ module Commands
     end
 
     def handle_call(message)
+      user = Users::FindOrCreate.call(message.from)
+      Users::SetState.call(user.id, Users::States::START)
       send_message(
         chat_id: message.chat.id,
         text: welcome_text,

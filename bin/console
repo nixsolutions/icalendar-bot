@@ -2,9 +2,4 @@
 ENV['APP_ENV'] ||= 'development'
 require_relative '../system/boot'
 
-begin
-  require 'pry-byebug'
-  binding.pry
-rescue LoadError
-  binding.irb
-end
+Pry.start

@@ -1,21 +1,27 @@
 # frozen_string_literal: true
 
 describe Commands::Start do
-  subject(:command_start) { described_class.new(bot) }
+  subject { described_class.new(bot) }
 
   let(:bot)      { double('bot', send_message: nil) }
+  let(:user)     { Telegram::Bot::Types::User.new(id: 1, first_name: 'Test', last_name: 'Test') }
   let(:chat)     { Telegram::Bot::Types::Chat.new(id: 1) }
-  let(:message)  { Telegram::Bot::Types::Message.new(chat: chat) }
+  let(:message)  { Telegram::Bot::Types::Message.new(from: user, chat: chat) }
   let(:keyboard) { instance_double('Telegram::Bot::Types::InlineKeyboardMarkup') }
 
-  it 'sends welcome message with keyboard' do
+  before do
     allow_any_instance_of(Commands::Keyboards::MainReplyKeyboard).to receive(:call) { keyboard }
+  end
+
+  it 'sends welcome message with keyboard' do
+    allow_any_instance_of(Users::FindOrCreate).to receive(:call).and_return(user)
+    allow_any_instance_of(Users::SetState).to receive(:call)
     expect(bot).to receive(:send_message).with(
       chat_id: 1,
       text: I18n.t('welcome.text'),
       parse_mode: :markdown,
       reply_markup: keyboard
     )
-    command_start.call(message)
+    subject.call(message)
   end
 end

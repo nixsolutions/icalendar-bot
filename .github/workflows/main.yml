@@ -19,6 +19,12 @@ jobs:
           rvm install $(cat .ruby-version) --binary
           rvm --default use $(cat .ruby-version)
 
+      - name: Setup DynamoDB Local
+        uses: rrainn/dynamodb-action@v2.0.0
+        with:
+          port: 8000
+          cors: '*'
+
       - name: Build App
         env:
           RAILS_ENV: test
