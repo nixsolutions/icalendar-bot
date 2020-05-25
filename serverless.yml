@@ -22,6 +22,8 @@ provider:
         - "dynamodb:PutItem"
         - "dynamodb:UpdateItem"
         - "dynamodb:DeleteItem"
+        - "dynamodb:ListTables"
+        - 'dynamodb:DescribeTable'
       Resource:
         - "*"
 
@@ -39,6 +41,7 @@ functions:
       - arn:aws:lambda:eu-central-1:225265212598:layer:icalendarBotGemLayer:1
     environment:
       APP_NAME: icalendar
+      APP_ENV: ${self:custom.myStage}
       GEM_PATH: /opt/2.7.0
       TELEGRAM_BOT_API_TOKEN: ${ssm:/app/${self:service}/${self:custom.myStage}/telegram_token}
     events:
