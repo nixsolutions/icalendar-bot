@@ -1,21 +1,16 @@
 # frozen_string_literal: true
 
-require_relative 'commands/keyboard_helpers'
-# require_relative 'commands/context_helpers'
-require_relative 'commands/base'
-Dir['./app/commands/**/*.rb'].each { |f| require f.delete_prefix('app/') }
-
 module Commands
   Error = Class.new(StandardError)
   FallbackError = Class.new(Error)
 
   COMMAND_CLASSES = {
     '/start': Commands::Start,
-    '📆 Schedule': Commands::CreateAppointment::SelectTime
+    '📆 Schedule': Commands::CreateAppointment::SelectDay
   }.freeze
 
   CALLBACK_CLASSES = {
-    'schedule': Commands::CreateAppointment::SelectTime
+    'select_time': Commands::CreateAppointment::SelectTime
   }.freeze
 
   FALLBACK_COMMAND_CLASS = Commands::Unknown
