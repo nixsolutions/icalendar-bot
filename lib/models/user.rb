@@ -10,4 +10,10 @@ class User
   field :subscribers
   field :state
   has_many :appointments
+
+  def self.find_or_create(user)
+    find(user.id.to_s)
+  rescue Dynamoid::Errors::RecordNotFound
+    create(user.to_h)
+  end
 end
