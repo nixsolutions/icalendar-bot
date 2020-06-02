@@ -1,11 +1,5 @@
 service: icalendar-bot
 
-custom:
-  myStage: ${opt:stage, self:provider.stage}
-  settings:
-    dev:
-      TELEGRAM_TOKEN: ${ssm:/app/${self:service}/dev/telegram_token}
-
 provider:
   name: aws
   runtime: ruby2.7
@@ -59,3 +53,8 @@ package:
     - system/**
   exclude:
     - ruby/**
+
+
+custom:
+  myStage: ${opt:stage, self:provider.stage}
+
