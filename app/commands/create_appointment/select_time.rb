@@ -11,12 +11,11 @@ module Commands
         date = DateTime.strptime(args.fetch('day'), '%Q')
         send_message(
           chat_id: callback.message.chat.id,
-          text: message(date),
+          text: message_text(date),
           parse_mode: :markdown,
           reply_markup: time_selection_keyboard(date)
         )
-        user = User.find_or_create(message.from)
-        Users::SetState.call(user.id, Users::States::SELECT_TIME)
+        User.set_state(callback.from, :select_time)
       end
 
       def time_selection_keyboard(date)
@@ -28,7 +27,7 @@ module Commands
         )
       end
 
-      def message(day)
+      def message_text(day)
         <<~MARKDOWN
           *——— #{day.strftime('%B %d, %a')} ———*
           Time:

@@ -11,8 +11,7 @@ module Commands
         parse_mode: :markdown,
         reply_markup: Keyboards::MainReplyKeyboard.new.call
       )
-      user = User.find_or_create(message.from)
-      Users::SetState.call(user.id, Users::States::START)
+      User.set_state(message.from, :start)
     end
   end
 end

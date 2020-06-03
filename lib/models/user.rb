@@ -2,13 +2,14 @@
 
 class User
   include Dynamoid::Document
+  include States
   table capacity_mode: :on_demand
 
   field :first_name
   field :last_name
   field :username
   field :subscribers
-  field :state
+  field :bot_status, :integer
   has_many :appointments
 
   def self.find_or_create(user)

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-require 'system/boot'
+require_relative 'system/boot'
 
 def webhook(event:, context:)
   bot = Telegram::Bot::Api.new(ENV.fetch('TELEGRAM_BOT_API_TOKEN'))

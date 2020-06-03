@@ -9,12 +9,13 @@ module Commands
         date_time = DateTime.strptime(args.fetch('day_time'), '%Q')
         send_message(
           chat_id: callback.message.chat.id,
-          text: message(date_time),
+          text: message_text(date_time),
           parse_mode: :markdown
         )
+        User.set_state(callback.from, :confirm_day_time)
       end
 
-      def message(day_time)
+      def message_text(day_time)
         <<~MARKDOWN
           *——— ⌚️#{day_time.strftime('%b %-d, %H:%M')} ———*
           #{I18n.t('create_appointment.subject')}
