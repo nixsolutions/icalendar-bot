@@ -10,7 +10,8 @@ module Commands
   }.freeze
 
   CALLBACK_CLASSES = {
-    'select_time': Commands::CreateAppointment::SelectTime
+    'select_time': Commands::CreateAppointment::SelectTime,
+    'confirm': Commands::CreateAppointment::ConfirmDayTime
   }.freeze
 
   FALLBACK_COMMAND_CLASS = Commands::Unknown

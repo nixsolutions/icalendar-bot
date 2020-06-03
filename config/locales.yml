@@ -2,8 +2,11 @@ en:
   welcome:
     text: "Hi, I'm the 🤖 who's gonna help you plan a great meeting.
            Do you what schedule some meeting?"
+
   create_appointment:
     choose_day: "Choose a day:"
+    subject: "Now write a subject"
+    description: "Now write a description"
 
   unknown:
     text: "Didn't get it"
@@ -13,6 +16,12 @@ ru:
   welcome:
     text: "Привет, я 🤖, который поможет тебе спланировать отличную встречу.
           Ты планируешь какую-нибудь встречу?"
+
+  create_appointment:
+    choose_day: "Выбери день:"
+    subject: "Тема встречи:"
+    description: "Теперь че там по описанию:"
+
   unknown:
     text: "Непонял :("
     callback_text: "Не понимаю тебя"

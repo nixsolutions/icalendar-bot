@@ -13,13 +13,17 @@ module Commands
           text: I18n.t('create_appointment.choose_day'),
           reply_markup: day_selection_keyboard
         )
+        user = User.find_or_create(message.from)
+        Users::SetState.call(user.id, Users::States::SELECT_DAY)
       end
 
       def day_selection_keyboard
+        now = DateTime.now
+        p  now.strftime('%Q')
         inline_keyboard(
           [
-            button("Today #{Time.now.to_date.strftime('%d of %B, %Y')}", CALLBACK_NAME, day: 2),
-            button("Tomorrow #{Time.now.to_date.next_day.strftime('%d of %B, %Y')}", CALLBACK_NAME, day: 1)
+            button("Today #{now.strftime('%d of %B, %Y')}", CALLBACK_NAME, day: now.strftime('%Q')),
+            # button("Tomorrow #{now.next_day.strftime('%d of %B, %Y')}", CALLBACK_NAME, day: now.next_day.strftime('%Q'))
           ]
         )
       end
