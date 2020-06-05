@@ -30,9 +30,9 @@ provider:
 
 functions:
   icalendar:
-    handler: webhook_handler.webhook
+    handler: app/webhook_handler.WebhookHandler.call
     layers:
-      - arn:aws:lambda:eu-central-1:225265212598:layer:icalendarBotGemLayer:1
+      - arn:aws:lambda:eu-central-1:225265212598:layer:gemlayer:46
     environment:
       APP_NAME: icalendar
       APP_ENV: ${self:custom.myStage}
@@ -57,4 +57,3 @@ package:
 
 custom:
   myStage: ${opt:stage, self:provider.stage}
-
