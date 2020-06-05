@@ -14,6 +14,8 @@ require 'dynamoid'
 require 'telegram/bot'
 require 'zeitwerk'
 require 'i18n'
+require 'icalendar'
+require 'faraday'
 
 class ICalendarBot
   def self.init

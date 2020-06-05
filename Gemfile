@@ -17,6 +17,7 @@ gem 'pry'
 gem 'zeitwerk'
 
 # service api
+gem 'icalendar'
 gem 'telegram-bot-ruby', '~> 0.9.0', require: 'telegram/bot'
 
 # fast JSON processing
