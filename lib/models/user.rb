@@ -9,7 +9,7 @@ class User
   field :last_name
   field :username
   field :subscribers
-  field :bot_status, :integer
+  field :bot_status, :string
   has_many :appointments
 
   def self.find_or_create(user)

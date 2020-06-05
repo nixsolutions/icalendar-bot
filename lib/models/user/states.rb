@@ -3,11 +3,11 @@
 class User
   module States
     STATES_ENUM = {
-      start: 1,
-      select_time: 2,
-      select_day: 3,
-      confirm_day_time: 4,
-      write_description: 5
+      start: 'start',
+      select_time: 'select_time',
+      select_day: 'select_day',
+      confirm_day_time: 'confirm_day_time',
+      write_description: 'write_description'
     }.freeze
 
     def self.included(base)
