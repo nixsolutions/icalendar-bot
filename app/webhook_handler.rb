@@ -12,6 +12,7 @@ class WebhookHandler
   end
 
   def self.dispatch(bot, message)
+    I18n.locale = message.from.language_code || 'en'
     Bot::Dispatcher.new(bot, message).call
     { statusCode: 200 }
   rescue StandardError => e
