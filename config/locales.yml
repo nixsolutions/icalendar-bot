@@ -5,8 +5,8 @@ en:
 
   create_appointment:
     choose_day: "Choose a day:"
-    subject: "Now write a subject"
-    description: "Now write a description"
+    summary: "Now write a subject"
+    description: "Ok cool! Now write a description"
 
   unknown:
     text: "Didn't get it"
@@ -19,7 +19,7 @@ ru:
 
   create_appointment:
     choose_day: "Выбери день:"
-    subject: "Тема встречи:"
+    summary: "Тема встречи:"
     description: "Теперь че там по описанию:"
 
   unknown:
