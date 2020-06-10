@@ -6,35 +6,37 @@ module Commands
   class Base
     extend Forwardable
     include KeyboardHelpers
-    # include ContextHelpers
 
     attr_reader :api
 
-    def initialize(api, **_deps)
+    def initialize(api)
       @api = api
-      # super(deps)
     end
 
-    def call(message)
+    def call(message, user)
       case message
       when Telegram::Bot::Types::Message
-        handle_call(message)
+        handle_call(message, user)
       when Telegram::Bot::Types::CallbackQuery
-        args = JSON.parse(message.data)['args']
-        handle_callback(message, args)
+        args = MultiJson.load(message.data)['args']
+        handle_callback(message, user, args)
       end
     end
 
     private
 
     def_delegators :api, :send_message, :edit_message_text, :send_location,
-                   :delete_message, :send_photo, :answer_callback_query
+                   :delete_message, :send_document, :answer_callback_query
 
-    def handle_call(_message)
+    def available_transition
+      nil
+    end
+
+    def handle_call(_message, _user)
       raise NotImplementedError, "you have to implement #{self.class.name}#handle_call"
     end
 
-    def handle_callback(_callback, _args)
+    def handle_callback(_callback, _user, _args)
       raise NotImplementedError, "you have to implement #{self.class.name}#handle_callback"
     end
   end

@@ -2,7 +2,7 @@
 
 module Bot
   class Dispatcher < ApplicationService
-    attr_reader :message
+    attr_reader :message, :bot
 
     def initialize(bot, message)
       @bot = bot
@@ -10,39 +10,30 @@ module Bot
     end
 
     def call
-      case message
-      when Telegram::Bot::Types::Message
-        dispatch_message(message)
-      when Telegram::Bot::Types::CallbackQuery
-        dispatch_callback(message)
-      end
+      user = User.find_or_create(message.from)
+      command_class(message, user).new(bot).call(message, user)
     end
 
     private
 
-    attr_reader :bot
-
-    def dispatch_message(message)
-      command_class = Commands.class_for(command_name(message))
-      return Bot::StepHandler.call(message) if command_class == Commands::FALLBACK_COMMAND_CLASS
-
-      handler = command_class.new(bot)
-
-      handler.call(message)
+    def command_class(message, user)
+      case message
+      when Telegram::Bot::Types::Message
+        message_class(message, user)
+      when Telegram::Bot::Types::CallbackQuery
+        callback_class(message, user)
+      else
+        Commands::Unknown
+      end
     end
 
-    def dispatch_callback(message)
-      handler = Commands.class_for_callback(callback_name(message)).new(bot)
-
-      handler.call(message)
+    def message_class(message, user)
+      Bot::StepHandler.call(message, user)
     end
 
-    def command_name(message)
-      message.text&.gsub(/_\d+$/, '')&.to_sym
-    end
-
-    def callback_name(message)
-      JSON.parse(message.data)['command'].to_sym
+    def callback_class(message, _user)
+      MultiJson.load(message.data)['command'].to_sym
+      Commands.class_for_callback(callback_name(message))
     end
   end
 end
