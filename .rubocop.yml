@@ -16,7 +16,7 @@ Metrics/BlockLength:
 
 Lint/UnusedMethodArgument:
   Exclude:
-    - 'webhook_handler.rb'
+    - 'app/webhook_handler.rb'
 
 Metrics/LineLength:
   Max: 120
