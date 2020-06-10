@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-Dir[File.expand_path 'lib/models/*.rb'].each { |f| require_relative f }
 Dynamoid.configure do |config|
   config.namespace = "#{ENV.fetch('APP_NAME')}_#{ENV.fetch('APP_ENV')}"
   config.endpoint = ENV.fetch('DYNAMO_DB_URL', nil)

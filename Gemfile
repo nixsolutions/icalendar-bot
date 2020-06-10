@@ -12,6 +12,7 @@ gem 'dynamoid'
 
 # debug
 gem 'pry'
+gem 'sentry-raven'
 
 # boot
 gem 'zeitwerk'
@@ -21,8 +22,8 @@ gem 'icalendar'
 gem 'telegram-bot-ruby', '~> 0.9.0', require: 'telegram/bot'
 
 # fast JSON processing
+gem 'multi_json'
 gem 'oj'
-# gem 'multi_json'
 
 group :development, :test do
   gem 'dotenv'

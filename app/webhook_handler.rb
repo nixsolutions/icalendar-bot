@@ -15,7 +15,9 @@ class WebhookHandler
     Bot::Dispatcher.new(bot, message).call
     { statusCode: 200 }
   rescue StandardError => e
-    p e
+    puts "Error during processing: #{$!}"
+    puts "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
+    Raven.capture_exception(e)
     { statusCode: 200 }
   ensure
     { statusCode: 200 }

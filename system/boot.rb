@@ -16,11 +16,15 @@ require 'zeitwerk'
 require 'i18n'
 require 'icalendar'
 require 'faraday'
+require 'sentry-raven'
+require 'oj'
+require 'multi_json'
 
 class ICalendarBot
   def self.init
     Zeitwerk::Loader.new.tap do |loader|
       loader.enable_reloading
+      loader.preload File.join('config/initializers')
       loader.push_dir File.join('app')
       loader.push_dir File.join('lib')
       loader.collapse('lib/services')
@@ -31,8 +35,3 @@ class ICalendarBot
 end
 
 ICalendarBot.init
-
-APP_ROOT = '../'
-require_relative 'boot/dynamoid'
-I18n.load_path << Dir[File.expand_path('config') + '/*.yml']
-I18n.default_locale = :en
