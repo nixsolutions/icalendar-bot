@@ -17,8 +17,8 @@ require 'i18n'
 require 'icalendar'
 require 'faraday'
 require 'sentry-raven'
-require 'oj'
 require 'multi_json'
+require 'oj'
 
 class ICalendarBot
   def self.init
