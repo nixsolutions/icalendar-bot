@@ -41,6 +41,8 @@ namespace :db do
   task :drop, :env do |_t, args|
     env = args[:env]
     ENV['APP_ENV'] = env
+    raise if env == 'prod'
+
     require_relative 'system/boot'
     DynamoidReset.all
     p 'success'
