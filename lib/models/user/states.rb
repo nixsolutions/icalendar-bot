@@ -2,22 +2,27 @@
 
 class User
   module States
-    STATES_ENUM = {
-      start: 'start',
-      select_time: 'select_time',
-      select_day: 'select_day',
-      confirm_day_time: 'confirm_day_time',
-      write_description: 'write_description'
-    }.freeze
+    STATES_ENUM = [
+      START = :start,
+      SELECT_TIME = :select_time,
+      SELECT_DAY = :select_day,
+      CONFIRM_DAY_TIME = :confirm_day_time,
+      WRITE_SUMMARY = :write_summary,
+      WRITE_DESCRIPTION = :write_description
+    ].freeze
 
     def self.included(base)
       base.extend(ClassMethods)
     end
 
+    def update_state(status)
+      User.update(id, bot_status: status)
+    end
+
     module ClassMethods
-      def set_state(user, status)
+      def update_state(user, status)
         user = User.find_or_create(user)
-        User.update(user.id, bot_status: STATES_ENUM.fetch(status))
+        user.update_state(status)
       end
     end
   end
