@@ -15,11 +15,11 @@ module Bot
       Commands.class_for(bot_status)&.available_transition || Commands::Unknown
     end
 
+    private
+
     def command_name
       message.text&.gsub(/_\d+$/, '')&.to_sym
     end
-
-    private
 
     def bot_status
       user.bot_status.to_sym
