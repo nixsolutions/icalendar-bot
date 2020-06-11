@@ -21,7 +21,7 @@ module Bot
       when Telegram::Bot::Types::Message
         message_class(message, user)
       when Telegram::Bot::Types::CallbackQuery
-        callback_class(message, user)
+        callback_class(message)
       else
         Commands::Unknown
       end
@@ -31,9 +31,9 @@ module Bot
       Bot::StepHandler.call(message, user)
     end
 
-    def callback_class(message, _user)
-      MultiJson.load(message.data)['command'].to_sym
-      Commands.class_for_callback(callback_name(message))
+    def callback_class(message)
+      command = MultiJson.load(message.data)['command'].to_sym
+      Commands.class_for_callback(command)
     end
   end
 end
