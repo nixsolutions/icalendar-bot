@@ -23,14 +23,14 @@ module Commands
       end
     end
 
+    def self.available_transition
+      nil
+    end
+
     private
 
     def_delegators :api, :send_message, :edit_message_text, :send_location,
                    :delete_message, :send_document, :answer_callback_query
-
-    def available_transition
-      nil
-    end
 
     def handle_call(_message, _user)
       raise NotImplementedError, "you have to implement #{self.class.name}#handle_call"
