@@ -9,7 +9,8 @@ class User
   field :last_name
   field :username
   field :subscribers
-  field :bot_status, :string
+  field :bot_status, :string, default: 'start'
+  field :appointment_context, :string
   has_many :appointments
 
   def self.find_or_create(user)
