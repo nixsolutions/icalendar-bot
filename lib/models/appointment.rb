@@ -17,6 +17,6 @@ class Appointment
   belongs_to :user
 
   def self.find_or_create_draft_for_user(user)
-    user.appointments.where(status: DRAFT).first || user.appointments.create
+    user.appointments.where(status: 'draft').first || user.appointments.create
   end
 end

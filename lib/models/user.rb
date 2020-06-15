@@ -18,4 +18,8 @@ class User
   rescue Dynamoid::Errors::RecordNotFound
     create(user.to_h)
   end
+
+  def current_appointment
+    Appointment.find(appointment_context)
+  end
 end
