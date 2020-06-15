@@ -7,7 +7,7 @@ module Commands
 
       def call
         reply_keyboard(
-          [button('📆 Schedule'), button('Show My')]
+          [button(I18n.t('welcome.schedule_command')), button(I18n.t('welcome.my_events'))]
         )
       end
     end
