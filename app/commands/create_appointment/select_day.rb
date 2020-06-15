@@ -3,6 +3,10 @@
 module Commands
   module CreateAppointment
     class SelectDay < Commands::Base
+      def self.available_transition
+        Commands::CreateAppointment::SelectTime
+      end
+
       private
 
       def handle_call(message, user)
