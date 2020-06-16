@@ -8,7 +8,7 @@ class Appointment
     COMPLETE = :complete
   ].freeze
 
-  field :subject
+  field :summary
   field :description
   field :status, :string, default: DRAFT
   field :started_at, :datetime
