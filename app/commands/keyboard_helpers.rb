@@ -84,12 +84,13 @@ module Commands
 
       def inline_button_markup(button)
         data = { command: button.command, args: button.args }.to_json
-        raise ArgumentError, 'callback_data is too big' if data.bytesize > 64
+        raise ArgumentError, 'callback_data is too big' if button.args.bytesize + button.command > 64
 
-        Telegram::Bot::Types::InlineKeyboardButton.new(
-          text: button.text,
-          callback_data: data
-        )
+        Telegram::Bot::Types::InlineKeyboardButton.new.tap do |keyboard|
+          keyboard.text = button.text
+          keyboard.url =  button.args.fetch(:url) if button.args.fetch(:url, nil)
+          keyboard.callback_data = data
+        end
       end
 
       def reply_button_markup(button)
