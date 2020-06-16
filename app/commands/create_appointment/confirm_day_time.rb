@@ -4,7 +4,7 @@ module Commands
   module CreateAppointment
     class ConfirmDayTime < Commands::Base
       def self.available_transition
-        Commands::CreateAppointment::WriteSummary
+        Commands::CreateAppointment::SelectTimeEnd
       end
 
       private
@@ -29,15 +29,15 @@ module Commands
 
       def message(date)
         {
-          text: message_text(date),
-          parse_mode: :markdown
+          text: message_text,
+          parse_mode: :markdown,
+          reply_markup: Keyboards::CreateAppointment::ConfirmDayTime.new(date).call
         }
       end
 
-      def message_text(day_time)
+      def message_text
         <<~MARKDOWN
-          *——— ⌚️#{day_time.strftime('%b %-d, %H:%M')} ———*
-          #{I18n.t('create_appointment.summary')}
+          #{I18n.t('create_appointment.chose_duration')}
         MARKDOWN
       end
 

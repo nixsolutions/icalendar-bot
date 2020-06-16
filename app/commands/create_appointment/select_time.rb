@@ -43,7 +43,7 @@ module Commands
 
       def message_text(day)
         <<~MARKDOWN
-          *——— #{day.strftime('%B %d, %a')} ———*
+          *——— 📅 #{day.strftime('%B %d, %a')} ———*
           #{I18n.t('create_appointment.select_time')}:
         MARKDOWN
       end
