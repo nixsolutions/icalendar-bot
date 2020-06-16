@@ -10,18 +10,22 @@ module Commands
       private
 
       def handle_call(message, user)
-        day, month = message.text.split('.').map(&:to_i)
-        date = DateTime.now.change({ day: day, month: month })
+        date = fetch_date(message.text)
         send_message(chat_id: message.chat.id, **message(date))
 
         save_date(date, user)
       end
 
       def handle_callback(callback, user, args)
-        date = DateTime.strptime(args.fetch('day'), '%Q')
+        date = fetch_date(args.fetch('day_month'))
         send_message(chat_id: callback.message.chat.id, **message(date))
 
         save_date(date, user)
+      end
+
+      def fetch_date(str)
+        day, month = str.split('.').map(&:to_i)
+        DateTime.now.change(day: day, month: month)
       end
 
       def save_date(date, user)

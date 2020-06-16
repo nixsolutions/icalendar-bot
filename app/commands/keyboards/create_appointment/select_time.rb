@@ -16,8 +16,8 @@ module Commands
         def call
           inline_keyboard(
             [
-              button('18:00', CALLBACK_NAME, day_time: date.change({ hour: 18 }).strftime('%Q')),
-              button('19:00', CALLBACK_NAME, day_time: date.change({ hour: 19 }).strftime('%Q'))
+              button('18:00', CALLBACK_NAME, day_time: date.change({ hour: 18, min: 0 }).strftime('%H:%M')),
+              button('19:00', CALLBACK_NAME, day_time: date.change({ hour: 19, min: 0 }).strftime('%H:%M'))
             ]
           )
         end

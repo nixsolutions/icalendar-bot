@@ -21,11 +21,10 @@ module Commands
         private
 
         def day_button(locale, day_time)
-          day = I18n.t("create_appointment.#{locale}")
           button(
-            "#{day} #{day_time.strftime('%d of %B')}",
+            "#{I18n.t("create_appointment.#{locale}")} #{day_time.strftime('%d %B')}",
             CALLBACK_NAME,
-            day: day_time.strftime('%Q')
+            day_month: day_time.strftime('%d.%m')
           )
         end
       end

@@ -10,17 +10,21 @@ module Commands
       private
 
       def handle_call(message, user)
-        hour, min = message.text.split(':').map(&:to_i)
-        date = user.current_appointment.started_at.change(hour: hour, min: min)
+        date = fetch_date(message.text, user)
         send_message(chat_id: message.chat.id, **message(date))
         save_date(date, user)
       end
 
       def handle_callback(callback, user, args)
-        date = DateTime.strptime(args.fetch('day_time'), '%Q')
+        date = fetch_date(args.fetch('hour_min'), user)
         send_message(chat_id: callback.message.chat.id, **message(date))
 
         save_date(date, user)
+      end
+
+      def fetch_date(str, user)
+        hour, min = str.split(':').map(&:to_i)
+        user.current_appointment.started_at.change(hour: hour, min: min)
       end
 
       def message(date)
