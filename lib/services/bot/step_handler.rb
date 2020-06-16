@@ -12,9 +12,6 @@ module Bot
     def call
       return Commands.class_for(command_name) if Commands.class_for(command_name) != Commands::Unknown
 
-      p "bot status #{bot_status}"
-      p "class: #{Commands.class_or_callback_for(bot_status)&.available_transition}"
-      p Commands.class_or_callback_for(bot_status)&.available_transition
       Commands.class_or_callback_for(bot_status)&.available_transition || Commands::Unknown
     end
 

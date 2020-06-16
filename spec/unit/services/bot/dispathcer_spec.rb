@@ -54,7 +54,7 @@ describe Bot::Dispatcher do
   end
 
   describe 'on callback' do
-    let(:message_data) {  { command: 'select_time' }.to_json }
+    let(:message_data) { { command: 'select_time' }.to_json }
     let(:message) { Telegram::Bot::Types::CallbackQuery.new(data: message_data, from: user) }
 
     context 'if command is recognized' do
