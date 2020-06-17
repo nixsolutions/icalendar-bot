@@ -12,7 +12,7 @@ class Appointment
   field :description
   field :status, :string, default: DRAFT
   field :started_at, :datetime
-  field :ended_end, :datetime
+  field :ended_at, :datetime
   field :index_number, :integer
   belongs_to :user
 
