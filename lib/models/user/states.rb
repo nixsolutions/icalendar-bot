@@ -7,6 +7,7 @@ class User
       SELECT_TIME = :select_time,
       SELECT_DAY = :select_day,
       CONFIRM_DAY_TIME = :confirm_day_time,
+      SELECT_TIME_END = :select_time_end,
       WRITE_SUMMARY = :write_summary,
       WRITE_DESCRIPTION = :write_description
     ].freeze
