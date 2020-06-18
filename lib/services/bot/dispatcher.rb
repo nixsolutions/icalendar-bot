@@ -12,6 +12,8 @@ module Bot
     def call
       user = User.find_or_create(message.from)
       command_class(message, user).new(bot).call(message, user)
+    rescue TypeError, Date::Error
+      Commands::Unknown.new(bot).call(message, nil)
     end
 
     private
