@@ -17,7 +17,7 @@ module Commands
     'select_day': CreateAppointment::SelectDay,
     'confirm_day_time': CreateAppointment::ConfirmDayTime,
     'select_time_end': CreateAppointment::SelectTimeEnd,
-    'send_appointment': CreateAppointment::SendAppointment
+    'send_file': CreateAppointment::SendAppointment
   }.freeze
 
   FALLBACK_COMMAND_CLASS = Unknown

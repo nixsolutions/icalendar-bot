@@ -8,21 +8,20 @@ class IcsFileGenerator < ApplicationService
   end
 
   def call
-    Faraday::UploadIO.new(icalendar_file,
-                          'text/calendar;charset=UTF-8',
-                          "#{appointment.subject}.ics",
-                          'Content-Disposition': 'inline')
+    Faraday::UploadIO.new(icalendar_file.path, 'text/calendar', "#{appointment.summary}.ics")
   end
 
   private
 
   def calendar
-    Icalendar::Calendar.new.event do |e|
+    cal = Icalendar::Calendar.new
+    cal.event do |e|
       e.dtstart     = appointment.started_at
       e.dtend       = appointment.ended_at
-      e.summary     = appointment.subject
+      e.summary     = appointment.summary
       e.description = appointment.description
     end
+    cal
   end
 
   def icalendar_file
