@@ -6,8 +6,10 @@ module Commands
 
   COMMAND_CLASSES = {
     '/start': Start,
-    '📆 Schedule': CreateAppointment::SelectDay,
-    '📆 Создать встречу': CreateAppointment::SelectDay,
+    '📝 Schedule': CreateAppointment::SelectDay,
+    '📝 Создать встречу': CreateAppointment::SelectDay,
+    '🗓 My events': CreateAppointment::MyEvents,
+    '🗓 Мои встречи': CreateAppointment::MyEvents,
     'write_summary': CreateAppointment::WriteSummary,
     'write_description': CreateAppointment::WriteDescription
   }.freeze
