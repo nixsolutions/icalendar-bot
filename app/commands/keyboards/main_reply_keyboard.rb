@@ -14,11 +14,11 @@ module Commands
       private
 
       def schedule_command
-        "📝 I18n.t('welcome.schedule_command')"
+        "📝 #{I18n.t('welcome.schedule_command')}"
       end
 
       def events_command
-        "🗓 I18n.t('welcome.my_events')"
+        "🗓 #{I18n.t('welcome.my_events')}"
       end
     end
   end
