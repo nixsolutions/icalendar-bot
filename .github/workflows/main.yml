@@ -8,16 +8,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: Set up RVM
-        run: |
-          curl -sSL https://get.rvm.io | bash
-
-      - name: Set up Ruby from .ruby-version
-        run: |
-          source $HOME/.rvm/scripts/rvm
-          rvm install $(cat .ruby-version) --binary
-          rvm --default use $(cat .ruby-version)
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
 
       - name: Setup DynamoDB Local
         uses: rrainn/dynamodb-action@v2.0.0
@@ -29,12 +23,10 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
-          source $HOME/.rvm/scripts/rvm
           gem install bundler -v 2.1.2 --no-doc
           bundle install --jobs 4 --retry 3
 
       - name: Run Tests
         run: |
-          source $HOME/.rvm/scripts/rvm
           bundle exec rubocop
           bundle exec rspec
