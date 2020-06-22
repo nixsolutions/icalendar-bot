@@ -2,6 +2,7 @@
 
 class IcsLinkGenerator < ApplicationService
   attr_reader :appointment
+
   HOST = 'www.addevent.com'
 
   def initialize(appointment)

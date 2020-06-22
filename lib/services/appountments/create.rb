@@ -3,6 +3,7 @@
 module Appointments
   class Create < ApplicationService
     attr_reader :appointments
+
     def initialize(user)
       @appointments = user.appointments
     end
