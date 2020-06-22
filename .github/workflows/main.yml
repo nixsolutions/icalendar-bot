@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     steps:
       - uses: actions/checkout@v1
@@ -13,20 +13,28 @@ jobs:
         with:
           ruby-version: 2.7
 
+      - name: Build App
+        env:
+          APP_ENV: test
+        run: |
+          gem install bundler -v 2.1.2 --no-doc
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Rubocop
+        run: |
+         bundle exec rubocop
+
       - name: Setup DynamoDB Local
         uses: rrainn/dynamodb-action@v2.0.0
         with:
           port: 8000
           cors: '*'
 
-      - name: Build App
-        env:
-          RAILS_ENV: test
+      - name: Setup AWS credentials
         run: |
-          gem install bundler -v 2.1.2 --no-doc
-          bundle install --jobs 4 --retry 3
+          mkdir ~/.aws
+          echo -e "[default]\naws_access_key_id=''\naws_secret_access_key=''" > ~/.aws/credentials
 
       - name: Run Tests
         run: |
-          bundle exec rubocop
           bundle exec rspec

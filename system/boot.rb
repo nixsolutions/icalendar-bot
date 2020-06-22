@@ -3,6 +3,7 @@
 ENV['APP_NAME'] = 'icalendar'
 
 if %w[development test].include? ENV['APP_ENV']
+  ENV['AWS_REGION'] = 'test'
   require 'bundler'
   Bundler.setup
   require 'pry'
@@ -22,12 +23,11 @@ require 'multi_json'
 require 'oj'
 
 class ICalendarBot
+  PRELOAD_FILES = %w[config/initializers lib/services/application_service.rb lib/models/user/states.rb lib].freeze
+
   def self.init
     Zeitwerk::Loader.new.tap do |loader|
-      loader.enable_reloading
-      loader.preload File.join('config/initializers')
-      loader.preload File.join('lib/services/application_service.rb')
-      loader.preload File.join('lib')
+      loader.preload PRELOAD_FILES
       loader.push_dir File.join('app')
       loader.collapse('lib/services')
       loader.collapse('lib/models')
