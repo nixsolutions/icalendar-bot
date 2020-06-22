@@ -18,7 +18,7 @@ module Commands
       end
 
       def events_command
-        "🗓 #{I18n.t('welcome.my_events')}"
+        "🗓 #{I18n.t('my_events.text')}"
       end
     end
   end

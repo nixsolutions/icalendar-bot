@@ -1,9 +1,11 @@
 en:
   welcome:
     schedule_command: "Schedule"
-    my_events: "️My events"
     text: "Hi, I'm the 🤖 who's gonna help you plan a great meeting.
            Do you what schedule some meeting?"
+
+  my_events:
+    text: "️My events"
 
   create_appointment:
     choose_day: "Write a day in format day.month(example: 01.02) or select from the list above:"
@@ -22,9 +24,11 @@ en:
 ru:
   welcome:
     schedule_command: "Создать встречу"
-    my_events: "Мои встречи"
     text: "Привет, я 🤖, который поможет тебе спланировать отличную встречу.
           Ты планируешь какую-нибудь встречу?"
+
+  my_events:
+    text: "Мои встречи"
 
   create_appointment:
     choose_day: "Укажи день в формате день.месяц(например 01.02) или выбери из списка ниже:"
