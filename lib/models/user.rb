@@ -8,7 +8,7 @@ class User
   field :first_name
   field :last_name
   field :username
-  field :subscribers
+  field :subscribers, :array
   field :bot_status, :string, default: 'start'
   field :appointment_context, :string
   has_many :appointments

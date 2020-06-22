@@ -4,8 +4,8 @@ class Appointment
   include Dynamoid::Document
   table capacity_mode: :on_demand
   STATUS_ENUM = [
-    DRAFT = :draft,
-    COMPLETE = :complete
+    DRAFT = 'draft',
+    COMPLETE = 'complete'
   ].freeze
 
   field :summary
