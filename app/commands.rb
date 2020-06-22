@@ -8,8 +8,6 @@ module Commands
     '/start': Start,
     '📝 Schedule': CreateAppointment::SelectDay,
     '📝 Создать встречу': CreateAppointment::SelectDay,
-    '🗓 My events': MyEvents,
-    '🗓 Мои встречи': MyEvents,
     'write_summary': CreateAppointment::WriteSummary,
     'write_description': CreateAppointment::WriteDescription
   }.freeze
