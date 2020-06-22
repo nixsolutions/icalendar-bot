@@ -7,6 +7,7 @@ if %w[development test].include? ENV['APP_ENV']
   Bundler.setup
   require 'pry'
   require 'dotenv'
+  require 'factory_bot'
   Dotenv.overload ".env.#{ENV.fetch('APP_ENV')}"
 end
 
