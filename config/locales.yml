@@ -1,9 +1,21 @@
 en:
   welcome:
+    schedule_command: "Schedule"
     text: "Hi, I'm the 🤖 who's gonna help you plan a great meeting.
            Do you what schedule some meeting?"
+
+  my_events:
+    text: "️My events"
+
   create_appointment:
-    choose_day: "Choose a day:"
+    choose_day: "Write a day in format day.month(example: 01.02) or select from the list above:"
+    select_time: "Ok! write a time in format hour:minutes(example 12:30) or select from the list above:"
+    meeting_ended: "The meeting will be ended at"
+    chose_duration: "How long will the meeting last?"
+    today: "Today"
+    tomorrow: "Tomorrow"
+    summary: "Now write a subject"
+    description: "Ok cool! Now write a description"
 
   unknown:
     text: "Didn't get it"
@@ -11,9 +23,24 @@ en:
 
 ru:
   welcome:
+    schedule_command: "Создать встречу"
     text: "Привет, я 🤖, который поможет тебе спланировать отличную встречу.
           Ты планируешь какую-нибудь встречу?"
+
+  my_events:
+    text: "Мои встречи"
+
+  create_appointment:
+    choose_day: "Укажи день в формате день.месяц(например 01.02) или выбери из списка ниже:"
+    select_time: "Хорошо укажи время в формате час:минуты(например 12:30) или выбери из списка ниже:"
+    meeting_ended: "Миттинг закончится в"
+    chose_duration: "Как долго будет длится встреча?"
+    today: "Сегодня"
+    tomorrow: "Завтра"
+    summary: "Тема встречи:"
+    description: "Теперь че там по описанию:"
+
   unknown:
-    text: "Непонял :("
+    text: "Не понял :("
     callback_text: "Не понимаю тебя"
 

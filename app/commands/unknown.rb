@@ -4,14 +4,14 @@ module Commands
   class Unknown < Base
     private
 
-    def handle_call(message)
+    def handle_call(message, _user)
       send_message(
         chat_id: message.chat.id,
         text: message_text
       )
     end
 
-    def handle_callback(callback, _args)
+    def handle_callback(callback, _user, _args)
       answer_callback_query(
         callback_query_id: callback.id,
         text: callback_text

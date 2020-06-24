@@ -1,11 +1,5 @@
 service: icalendar-bot
 
-custom:
-  myStage: ${opt:stage, self:provider.stage}
-  settings:
-    dev:
-      TELEGRAM_TOKEN: ${ssm:/app/${self:service}/dev/telegram_token}
-
 provider:
   name: aws
   runtime: ruby2.7
@@ -24,25 +18,27 @@ provider:
         - "dynamodb:DeleteItem"
         - "dynamodb:ListTables"
         - 'dynamodb:DescribeTable'
+        - 'dynamodb:BatchGetItem'
       Resource:
         - "*"
 
   logs:
     frameworkLambda: true
 
-#layers:
-#  gemlayer:
-#    path: ruby
+layers:
+  gemlayer:
+    path: ruby
 
 functions:
   icalendar:
-    handler: webhook_handler.webhook
+    handler: app/webhook_handler.WebhookHandler.call
     layers:
-      - arn:aws:lambda:eu-central-1:225265212598:layer:icalendarBotGemLayer:1
+      - {Ref: GemlayerLambdaLayer }
     environment:
       APP_NAME: icalendar
       APP_ENV: ${self:custom.myStage}
       GEM_PATH: /opt/2.7.0
+      SENTRY_DSN: ${ssm:/app/${self:service}/${self:custom.myStage}/sentry_dsn}
       TELEGRAM_BOT_API_TOKEN: ${ssm:/app/${self:service}/${self:custom.myStage}/telegram_token}
     events:
       - http:
@@ -59,3 +55,7 @@ package:
     - system/**
   exclude:
     - ruby/**
+
+
+custom:
+  myStage: ${opt:stage, self:provider.stage}

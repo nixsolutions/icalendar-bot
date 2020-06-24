@@ -12,16 +12,18 @@ gem 'dynamoid'
 
 # debug
 gem 'pry'
+gem 'sentry-raven'
 
 # boot
 gem 'zeitwerk'
 
 # service api
+gem 'icalendar'
 gem 'telegram-bot-ruby', '~> 0.9.0', require: 'telegram/bot'
 
 # fast JSON processing
+gem 'multi_json'
 gem 'oj'
-# gem 'multi_json'
 
 group :development, :test do
   gem 'dotenv'
@@ -30,5 +32,6 @@ group :development, :test do
 end
 
 group :test do
+  gem 'factory_bot'
   gem 'rspec'
 end

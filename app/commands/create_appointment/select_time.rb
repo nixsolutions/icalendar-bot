@@ -3,48 +3,48 @@
 module Commands
   module CreateAppointment
     class SelectTime < Commands::Base
+      def self.available_transition
+        Commands::CreateAppointment::ConfirmDayTime
+      end
+
       private
 
-      def handle_call(message)
-        send_message(
-          chat_id: message.chat.id,
-          text: I18n.t('create_appointment.choose_day'),
-          reply_markup: day_selection_keyboard
-        )
+      def handle_call(message, user)
+        date = fetch_date(message.text)
+        send_message(chat_id: message.chat.id, **message(date))
+
+        save_date(date, user)
       end
 
-      def handle_callback(callback, args)
-        date = Date.new(2019, 1, args.fetch('day'))
-        send_message(
-          chat_id: callback.message.chat.id,
-          text: message(date),
+      def handle_callback(callback, user, args)
+        date = fetch_date(args.fetch('day_month'))
+        send_message(chat_id: callback.message.chat.id, **message(date))
+
+        save_date(date, user)
+      end
+
+      def fetch_date(str)
+        day, month = str.split('.').map(&:to_i)
+        DateTime.now.change(day: day, month: month)
+      end
+
+      def save_date(date, user)
+        user.current_appointment.update_attributes(started_at: date)
+        user.update_state(User::States::SELECT_TIME)
+      end
+
+      def message(date)
+        {
+          text: message_text(date),
           parse_mode: :markdown,
-          reply_markup: time_selection_keyboard
-        )
+          reply_markup: Keyboards::CreateAppointment::SelectTime.new(date).call
+        }
       end
 
-      def time_selection_keyboard
-        inline_keyboard(
-          [
-            button('18:00', 'schedule', day: 1),
-            button('19:00', 'schedule', day: 2)
-          ]
-        )
-      end
-
-      def day_selection_keyboard
-        inline_keyboard(
-          [
-            button("Today #{Time.now.to_date.strftime('%d of %B, %Y')}", 'schedule', day: 2),
-            button("Tomorrow #{Time.now.to_date.next_day.strftime('%d of %B, %Y')}", 'schedule', day: 1)
-          ]
-        )
-      end
-
-      def message(confday)
+      def message_text(day)
         <<~MARKDOWN
-          *——— #{confday.strftime('%B %d, %a')} ———*
-          Time:
+          *——— 📅 #{day.strftime('%B %d, %a')} ———*
+          #{I18n.t('create_appointment.select_time')}:
         MARKDOWN
       end
     end
