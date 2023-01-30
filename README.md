@@ -27,5 +27,4 @@ sls deploy
 ```
 
 ## License
-The project is developed by [NIX](http://nixsolutions.com) team and distributed under [MIT LICENSE](https://github.com/nixsolutions/
-icalendar-bot/blob/master/LICENSE)
+The project is developed by [NIX](http://nixsolutions.com) team and distributed under [MIT LICENSE](https://github.com/nixsolutions/icalendar-bot/blob/master/LICENSE)
